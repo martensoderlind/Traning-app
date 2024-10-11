@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="dist/index.js"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
@@ -14,21 +15,21 @@
       <h1>Training app</h1>
     </div>
     <div>
-      <form action="http://127.0.0.1:3000/backend/dist/index.js" method="post">
+      <form>
         <div>
-          <label for="">Date</label>
-          <input type="datetime-local" id="date" name="date" required />
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required />
         </div>
         <div>
-          <label for="">duration</label>
-          <input type="time-local" id="time" name="time" required />
+          <label for="time">duration</label>
+          <input type="time" id="time" name="time" required />
         </div>
         <div>
-          <label for="">Distance</label>
+          <label for="distance">Distance</label>
           <input type="number" id="distance" name="distance" required />
         </div>
         <div>
-          <input type="submit" />
+          <button id="submit">Submit</button>
         </div>
       </form>
     </div>
