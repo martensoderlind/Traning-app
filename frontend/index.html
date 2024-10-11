@@ -14,18 +14,18 @@
       <h1>Training app</h1>
     </div>
     <div>
-      <form action="/backend/dist/index.js">
+      <form action="http://127.0.0.1:3000/backend/dist/index.js" method="post">
         <div>
           <label for="">Date</label>
-          <input type="datetime-local" id="date" name="date" />
+          <input type="datetime-local" id="date" name="date" required />
         </div>
         <div>
           <label for="">duration</label>
-          <input type="time-local" id="time" name="time" />
+          <input type="time-local" id="time" name="time" required />
         </div>
         <div>
           <label for="">Distance</label>
-          <input type="number" id="distance" name="distance" />
+          <input type="number" id="distance" name="distance" required />
         </div>
         <div>
           <input type="submit" />
