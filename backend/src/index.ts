@@ -1,5 +1,4 @@
 import http from "http";
-import { mock } from "node:test";
 
 const mockDB = [
   {
@@ -17,6 +16,17 @@ const mockDB = [
 ];
 const port = 8080;
 const server = http.createServer((req, res) => {
+  if (req.method === "POST") {
+    console.log(req);
+    res.writeHead(200, {
+      "content-type": "application/json",
+    });
+
+    let body = "";
+
+    req.on("data", (chunk) => {});
+    req.on("end", () => {});
+  }
   res.writeHead(200, {
     "content-Type": "application/json",
   });
