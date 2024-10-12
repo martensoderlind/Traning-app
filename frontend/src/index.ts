@@ -24,7 +24,7 @@ submitButton.addEventListener("click", async (e) => {
     body: JSON.stringify(valuesFromInput),
   });
   const responseMessage = await response.json();
-  addTableRow(responseMessage.db[0]);
+  addTableRow(responseMessage.db[responseMessage.db.length - 1]);
 });
 
 function addTableRow(formData: any) {
