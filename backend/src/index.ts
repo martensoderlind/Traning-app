@@ -32,6 +32,10 @@ const server = http.createServer((req, res) => {
     });
     req.on("end", () => {
       console.log(`data mottagen: ${body}`);
+      res.writeHead(200, {
+        "content-Type": "application/json",
+      });
+      res.end(JSON.stringify({ message: "Data mottagen!" }));
     });
   }
   res.writeHead(200, {
