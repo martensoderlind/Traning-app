@@ -6,7 +6,7 @@ export function addValuesToDB(newInput: DataInput) {
   const newDbValue: DbValue = {
     id: newInputId,
     date: newInput.date,
-    duration: newInput.date,
+    duration: newInput.duration,
     distance: newInput.distance,
   };
   mockDB.push(newDbValue);
