@@ -1,19 +1,5 @@
 import http from "http";
-
-const mockDB = [
-  {
-    id: 1,
-    date: "2024-10-10",
-    duration: "00:50:00",
-    distance: 10,
-  },
-  {
-    id: 2,
-    date: "2024-10-10",
-    duration: "00:50:00",
-    distance: 10,
-  },
-];
+import { mockDB } from "./mockDB";
 const port = 8080;
 const server = http.createServer((req, res) => {
   if (req.method === "POST" && req.url === "/submit") {
