@@ -25,6 +25,8 @@ submitButton.addEventListener("click", async (e) => {
     body: JSON.stringify(valuesFromInput),
   });
   const responseMessage = await response.json();
-  newInput.textContent = responseMessage;
+  newInput.textContent = `response from server: ${JSON.stringify(
+    responseMessage
+  )}`;
   placeholderElement?.appendChild(newInput);
 });
