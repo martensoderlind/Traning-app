@@ -14,7 +14,6 @@ const server = http.createServer((req, res) => {
       body += chunk;
     });
     req.on("end", () => {
-      console.log(`data mottagen: ${body}`);
       addValuesToDB(JSON.parse(body));
       res.writeHead(200, {
         "content-Type": "application/json",

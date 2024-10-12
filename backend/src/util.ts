@@ -10,5 +10,4 @@ export function addValuesToDB(newInput: DataInput) {
     distance: newInput.distance,
   };
   mockDB.push(newDbValue);
-  console.log({ mockDB });
 }
