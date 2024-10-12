@@ -16,7 +16,6 @@ submitButton.addEventListener("click", async (e) => {
     "#placeholder"
   ) as HTMLUListElement;
 
-  const newInput = document.createElement("li");
   const response = await fetch("http://localhost:8080/submit", {
     headers: {
       "Content-Type": "text/plain",
@@ -25,12 +24,7 @@ submitButton.addEventListener("click", async (e) => {
     body: JSON.stringify(valuesFromInput),
   });
   const responseMessage = await response.json();
-  const resp = JSON.stringify(responseMessage.db[0]);
-  newInput.textContent = `response from server: ${resp}`;
-  // newInput.textContent = `response from server: ${JSON.stringify(
-  //   responseMessage
-  // )}`;
-  placeholderElement?.appendChild(newInput);
+  addTableRow(responseMessage.db[0]);
 });
 
 function addTableRow(formData: any) {
@@ -40,9 +34,9 @@ function addTableRow(formData: any) {
   const newDateInput = document.createElement("td");
   const newDistanceInput = document.createElement("td");
   const newDurationInput = document.createElement("td");
-  newDateInput.textContent = formData.date;
-  newDistanceInput.textContent = formData.distance;
-  newDurationInput.textContent = formData.duration;
+  newDateInput.textContent = JSON.stringify(formData.date);
+  newDistanceInput.textContent = JSON.stringify(formData.distance);
+  newDurationInput.textContent = JSON.stringify(formData.duration);
   newTableRow.appendChild(newDateInput);
   newTableRow.appendChild(newDistanceInput);
   newTableRow.appendChild(newDurationInput);
