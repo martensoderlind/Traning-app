@@ -27,8 +27,12 @@ const server = http.createServer((req, res) => {
 
     let body = "";
 
-    req.on("data", (chunk) => {});
-    req.on("end", () => {});
+    req.on("data", (chunk) => {
+      body += chunk;
+    });
+    req.on("end", () => {
+      console.log(`data mottagen: ${body}`);
+    });
   }
   res.writeHead(200, {
     "content-Type": "application/json",
