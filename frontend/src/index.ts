@@ -1,6 +1,6 @@
 const submitButton = document.querySelector("#submit") as HTMLButtonElement;
 
-submitButton.addEventListener("click", (e) => {
+submitButton.addEventListener("click", async (e) => {
   e.preventDefault();
   const dateInput = document.querySelector("#date") as HTMLInputElement;
   const distanceInput = document.querySelector("#distance") as HTMLInputElement;
@@ -11,13 +11,20 @@ submitButton.addEventListener("click", (e) => {
     duration: timeInput.value,
     distance: distanceInput.value,
   };
-  console.log(valuesFromInput);
 
   const placeholderElement = document.querySelector(
     "#placeholder"
   ) as HTMLUListElement;
 
   const newInput = document.createElement("li");
-  newInput.textContent = `date: ${valuesFromInput.date}, duration: ${valuesFromInput.duration}, distance: ${valuesFromInput.distance}`;
+  const response = await fetch("http://localhost:8080/submit", {
+    headers: {
+      "Content-Type": "text/plain",
+    },
+    method: "POST",
+    body: JSON.stringify(valuesFromInput),
+  });
+  const responseMessage = await response.json();
+  newInput.textContent = responseMessage;
   placeholderElement?.appendChild(newInput);
 });
