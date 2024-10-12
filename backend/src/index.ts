@@ -1,5 +1,6 @@
 import http from "http";
 import { mockDB } from "./mockDB";
+import { addValuesToDB } from "./util";
 const port = 8080;
 const server = http.createServer((req, res) => {
   if (req.method === "POST" && req.url === "/submit") {
@@ -14,10 +15,11 @@ const server = http.createServer((req, res) => {
     });
     req.on("end", () => {
       console.log(`data mottagen: ${body}`);
+      addValuesToDB(JSON.parse(body));
       res.writeHead(200, {
         "content-Type": "application/json",
       });
-      res.end(JSON.stringify({ message: "Data mottagen!" }));
+      res.end(JSON.stringify({ mockDB }));
     });
   } else {
     res.writeHead(200, {
