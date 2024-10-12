@@ -21,10 +21,6 @@ const server = http.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    res.writeHead(200, {
-      "content-type": "application/json",
-    });
-
     let body = "";
 
     req.on("data", (chunk) => {
@@ -37,13 +33,14 @@ const server = http.createServer((req, res) => {
       });
       res.end(JSON.stringify({ message: "Data mottagen!" }));
     });
+  } else {
+    res.writeHead(200, {
+      "content-Type": "application/json",
+    });
+    const result = JSON.stringify({ mockDB });
+    res.write(result);
+    res.end();
   }
-  res.writeHead(200, {
-    "content-Type": "application/json",
-  });
-  const result = JSON.stringify({ mockDB });
-  res.write(result);
-  res.end();
 });
 server.listen(port, () => {
   console.log(`server running on http://localhost:${port}/`);
