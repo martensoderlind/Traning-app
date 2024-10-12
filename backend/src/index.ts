@@ -1,5 +1,5 @@
 import http from "http";
-import { mockDB } from "./mockDB";
+import { db } from "./mockDB";
 import { addValuesToDB } from "./util";
 const port = 8080;
 const server = http.createServer((req, res) => {
@@ -18,13 +18,13 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, {
         "content-Type": "application/json",
       });
-      res.end(JSON.stringify({ mockDB }));
+      res.end(JSON.stringify({ db }));
     });
   } else {
     res.writeHead(200, {
       "content-Type": "application/json",
     });
-    const result = JSON.stringify({ mockDB });
+    const result = JSON.stringify({ db });
     res.write(result);
     res.end();
   }
