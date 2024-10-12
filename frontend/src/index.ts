@@ -25,8 +25,26 @@ submitButton.addEventListener("click", async (e) => {
     body: JSON.stringify(valuesFromInput),
   });
   const responseMessage = await response.json();
-  newInput.textContent = `response from server: ${JSON.stringify(
-    responseMessage
-  )}`;
+  const resp = JSON.stringify(responseMessage.db[0]);
+  newInput.textContent = `response from server: ${resp}`;
+  // newInput.textContent = `response from server: ${JSON.stringify(
+  //   responseMessage
+  // )}`;
   placeholderElement?.appendChild(newInput);
 });
+
+function addTableRow(formData: any) {
+  const tableElement = document.querySelector("#placeholder");
+
+  const newTableRow = document.createElement("tr");
+  const newDateInput = document.createElement("td");
+  const newDistanceInput = document.createElement("td");
+  const newDurationInput = document.createElement("td");
+  newDateInput.textContent = formData.date;
+  newDistanceInput.textContent = formData.distance;
+  newDurationInput.textContent = formData.duration;
+  newTableRow.appendChild(newDateInput);
+  newTableRow.appendChild(newDistanceInput);
+  newTableRow.appendChild(newDurationInput);
+  tableElement?.appendChild(newTableRow);
+}
