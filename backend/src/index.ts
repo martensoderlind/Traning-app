@@ -16,8 +16,11 @@ const mockDB = [
 ];
 const port = 8080;
 const server = http.createServer((req, res) => {
-  if (req.method === "POST") {
-    console.log(req);
+  if (req.method === "POST" && req.url === "/submit") {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
     res.writeHead(200, {
       "content-type": "application/json",
     });
