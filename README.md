@@ -12,9 +12,9 @@ Link: https://github.com/users/martensoderlind/projects/2/views/1
 
 Features
 
-    Add running sessions with details such as time, date, and distance.
-    View logged sessions in a structured table.
-    Data is stored persistently using SQLite.
+    - Add running sessions with details such as time, date, and distance.
+    - View logged sessions in a structured table.
+    - Data is stored persistently using SQLite.
 
 Technologies Used
 
@@ -29,7 +29,7 @@ SQLite is a self-contained, serverless, zero-configuration, and transactional SQ
 
 What I Learned:
 
-    How to connect to an SQLite database using Node.js.
-    Creating tables and managing schemas for data storage.
-    Performing SQL queries to retrieve data.
-    Error handling and data validation during database operations.
+    - How to connect to an SQLite database using better-sqlite3.
+    - Creating tables for data storage.
+    - Performing SQL queries to retrieve data.
+    
