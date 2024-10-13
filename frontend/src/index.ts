@@ -57,6 +57,12 @@ async function fetchDbData() {
   }
 }
 
+const createTableCell = (input: string): HTMLTableCellElement => {
+  const cellElement = document.createElement("td");
+  cellElement.textContent = input;
+  return cellElement;
+};
+
 function addTableRow(session: RunningSession) {
   const tableElement = document.querySelector("#placeholder");
 
