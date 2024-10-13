@@ -30,6 +30,24 @@ submitButton.addEventListener("click", async (e) => {
   }
 });
 
+async function fetchDbData() {
+  try {
+    const response = await fetch("http://localhost:8080/", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "GET",
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log({ data });
+  } catch (error) {
+    console.log(`Error fetching db data: ${error}`);
+  }
+}
+
 function addTableRow(date: string, duration: string, distance: string) {
   const tableElement = document.querySelector("#placeholder");
 
