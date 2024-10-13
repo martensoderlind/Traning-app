@@ -1,17 +1,3 @@
-import { db } from "./mockDB";
-import { DataInput, DbValue } from "./types";
-
-export function addValuesToDB(newInput: DataInput) {
-  const newInputId = db.length + 1;
-  const newDbValue: DbValue = {
-    id: newInputId,
-    date: newInput.date,
-    duration: newInput.duration,
-    distance: newInput.distance,
-  };
-  db.push(newDbValue);
-}
-
 export function dateControll(todaysDate: Date, submitDate: string) {
   const [year, month, day] = submitDate.split("-").map(Number);
   const inputDate = new Date(year, month - 1, day);
