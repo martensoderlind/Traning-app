@@ -1,10 +1,22 @@
 import http from "http";
-import { db } from "./mockDB";
+// import { db } from "./mockDB";
 import { addValuesToDB } from "./util";
-import { addSession } from "./db";
+import { addSession, db } from "./db";
 const port = 8080;
 const server = http.createServer((req, res) => {
-  if (req.method === "OPTIONS") {
+  if (req.method === "GET" && req.url === "/") {
+    const dbData = db.prepare("SELECT * FROM sessions");
+    const data = dbData.all();
+    res.writeHead(200, {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Content-Type": "application/json",
+    });
+
+    // res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(data));
+  } else if (req.method === "OPTIONS") {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
@@ -12,8 +24,7 @@ const server = http.createServer((req, res) => {
     });
     res.end();
     return;
-  }
-  if (req.method === "POST" && req.url === "/submit") {
+  } else if (req.method === "POST" && req.url === "/submit") {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
