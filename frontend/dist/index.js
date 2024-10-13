@@ -9,38 +9,72 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const submitButton = document.querySelector("#submit");
+const dateInput = document.querySelector("#date");
+const distanceInput = document.querySelector("#distance");
+const timeInput = document.querySelector("#time");
+const tableElement = document.querySelector("#placeholder");
+const API_URL = "http://localhost:8080";
 submitButton.addEventListener("click", (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
-    const dateInput = document.querySelector("#date");
-    const distanceInput = document.querySelector("#distance");
-    const timeInput = document.querySelector("#time");
+    if (!dateInput || !distanceInput || !timeInput)
+        return;
     const valuesFromInput = {
         date: dateInput.value,
         duration: timeInput.value,
         distance: distanceInput.value,
     };
-    const placeholderElement = document.querySelector("#placeholder");
-    const response = yield fetch("http://localhost:8080/submit", {
-        headers: {
-            "Content-Type": "text/plain",
-        },
-        method: "POST",
-        body: JSON.stringify(valuesFromInput),
-    });
-    const responseMessage = yield response.json();
-    addTableRow(responseMessage.db[responseMessage.db.length - 1]);
+    try {
+        const response = yield fetch(`${API_URL}/submit`, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(valuesFromInput),
+        });
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const responseMessage = yield response.json();
+        console.log(responseMessage);
+        addTableRow(responseMessage);
+    }
+    catch (error) {
+        console.error(error.message);
+    }
 }));
-function addTableRow(formData) {
-    const tableElement = document.querySelector("#placeholder");
-    const newTableRow = document.createElement("tr");
-    const newDateInput = document.createElement("td");
-    const newDistanceInput = document.createElement("td");
-    const newDurationInput = document.createElement("td");
-    newDateInput.textContent = JSON.stringify(formData.date);
-    newDistanceInput.textContent = JSON.stringify(formData.distance);
-    newDurationInput.textContent = JSON.stringify(formData.duration);
-    newTableRow.appendChild(newDateInput);
-    newTableRow.appendChild(newDistanceInput);
-    newTableRow.appendChild(newDurationInput);
-    tableElement === null || tableElement === void 0 ? void 0 : tableElement.appendChild(newTableRow);
+function fetchDbData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch(`${API_URL}/`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "GET",
+            });
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+            const data = yield response.json();
+            console.log({ data });
+            data.forEach(addTableRow);
+        }
+        catch (error) {
+            console.log(`Error fetching db data: ${error}`);
+        }
+    });
 }
+const createTableCell = (input) => {
+    const cellElement = document.createElement("td");
+    cellElement.textContent = input;
+    return cellElement;
+};
+function addTableRow(session) {
+    if (!tableElement)
+        return;
+    const newTableRow = document.createElement("tr");
+    newTableRow.append(createTableCell(session.date), createTableCell(session.distance.toString()), createTableCell(session.duration));
+    tableElement.appendChild(newTableRow);
+}
+document.addEventListener("DOMContentLoaded", () => {
+    fetchDbData();
+});

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "http-server . -p 3000",
+    "dev": "http-server ./frontend -p 3000 --cors",
     "build": "tsc"
   },
   "keywords": [],
