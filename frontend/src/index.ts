@@ -1,4 +1,4 @@
-import { time } from "console";
+import { error, time } from "console";
 
 const submitButton = document.querySelector("#submit") as HTMLButtonElement;
 
@@ -13,17 +13,23 @@ submitButton.addEventListener("click", async (e) => {
     duration: timeInput.value,
     distance: distanceInput.value,
   };
-
-  const response = await fetch("http://localhost:8080/submit", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify(valuesFromInput),
-  });
-  const responseMessage = await response.json();
-  console.log(responseMessage);
-  addTableRow(dateInput.value, timeInput.value, distanceInput.value);
+  try {
+    const response = await fetch("http://localhost:8080/submit", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(valuesFromInput),
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const responseMessage = await response.json();
+    console.log(responseMessage);
+    addTableRow(dateInput.value, timeInput.value, distanceInput.value);
+  } catch (error: any) {
+    console.error(error.message);
+  }
 });
 
 function addTableRow(date: string, duration: string, distance: string) {
