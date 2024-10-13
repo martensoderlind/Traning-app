@@ -18,10 +18,10 @@ Features
 
 Technologies Used
 
-    HTML/PicoCss
-    Typescript
-    Node.js
-    SQLite
+    - HTML/PicoCss
+    - Typescript
+    - Node.js
+    - SQLite
 
 SQLite
 
