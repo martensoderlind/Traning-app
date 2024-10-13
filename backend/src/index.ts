@@ -1,5 +1,6 @@
 import http from "http";
 import { addSession, db } from "./db";
+import { validation } from "./util";
 
 const port = 8080;
 const server = http.createServer((req, res) => {
@@ -28,14 +29,26 @@ const server = http.createServer((req, res) => {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
     let body = "";
-
     req.on("data", (chunk) => {
       body += chunk;
     });
-    req.on("end", () => {
-      const { date, duration, distance } = JSON.parse(body);
-      console.log("Received POST data:", { date, duration, distance });
 
+    req.on("end", () => {
+      const todaysDate = new Date();
+      const sessionData = JSON.parse(body);
+      const isValid = validation(sessionData, todaysDate);
+
+      if (!isValid) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(
+          JSON.stringify({
+            error: "Input format of date or distance is incorrect.",
+          })
+        );
+        return;
+      }
+
+      const { date, duration, distance } = sessionData;
       addSession(date, distance, duration);
 
       res.writeHead(200, { "Content-Type": "application/json" });
@@ -43,9 +56,8 @@ const server = http.createServer((req, res) => {
     });
   } else {
     res.writeHead(200, {
-      "content-Type": "application/json",
+      "Content-Type": "application/json",
     });
-    // const result = JSON.stringify({ db });
     res.write("no call");
     res.end();
   }
