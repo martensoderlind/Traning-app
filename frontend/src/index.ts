@@ -32,7 +32,7 @@ submitButton.addEventListener("click", async (e) => {
     }
     const responseMessage = await response.json();
     console.log(responseMessage);
-    addTableRow(dateInput.value, timeInput.value, distanceInput.value);
+    addTableRow(responseMessage);
   } catch (error: any) {
     console.error(error.message);
   }
@@ -49,26 +49,24 @@ async function fetchDbData() {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-    const data = await response.json();
+    const data: RunningSession[] = await response.json();
     console.log({ data });
-    data.forEach((session: any) => {
-      addTableRow(session.date, session.duration, session.distance);
-    });
+    data.forEach(addTableRow);
   } catch (error) {
     console.log(`Error fetching db data: ${error}`);
   }
 }
 
-function addTableRow(date: string, duration: string, distance: string) {
+function addTableRow(session: RunningSession) {
   const tableElement = document.querySelector("#placeholder");
 
   const newTableRow = document.createElement("tr");
   const newDateInput = document.createElement("td");
   const newDistanceInput = document.createElement("td");
   const newDurationInput = document.createElement("td");
-  newDateInput.textContent = date;
-  newDistanceInput.textContent = distance.toString();
-  newDurationInput.textContent = duration;
+  newDateInput.textContent = session.date;
+  newDistanceInput.textContent = session.distance.toString();
+  newDurationInput.textContent = session.duration;
 
   newTableRow.appendChild(newDateInput);
   newTableRow.appendChild(newDistanceInput);
