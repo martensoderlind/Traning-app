@@ -30,7 +30,7 @@ const server = http.createServer((req, res) => {
       addSession(date, distance, duration);
 
       res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ message: "Session added", db }));
+      res.end(JSON.stringify({ date, duration, distance }));
     });
   } else {
     res.writeHead(200, {
