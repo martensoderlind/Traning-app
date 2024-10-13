@@ -14,7 +14,7 @@ Features
 
 Big picture plan
 
-    ![alt text](image1.png)
+![alt text](image1.png)
     link to big picture plan: https://excalidraw.com/
 
 Planning Board
