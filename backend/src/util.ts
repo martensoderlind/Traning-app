@@ -17,3 +17,6 @@ export function dateControll(todaysDate: string, submitDate: string) {
   const today = new Date(todaysDate);
   return inputDate.getTime() <= today.getTime();
 }
+export function distanceControll(submitDistance: number) {
+  return submitDistance > 0;
+}
