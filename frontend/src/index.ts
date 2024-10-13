@@ -43,6 +43,9 @@ async function fetchDbData() {
     }
     const data = await response.json();
     console.log({ data });
+    data.forEach((session: any) => {
+      addTableRow(session.date, session.duration, session.distance);
+    });
   } catch (error) {
     console.log(`Error fetching db data: ${error}`);
   }
@@ -64,3 +67,6 @@ function addTableRow(date: string, duration: string, distance: string) {
   newTableRow.appendChild(newDurationInput);
   tableElement?.appendChild(newTableRow);
 }
+document.addEventListener("DOMContentLoaded", () => {
+  fetchDbData();
+});
