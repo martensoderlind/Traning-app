@@ -11,3 +11,9 @@ export function addValuesToDB(newInput: DataInput) {
   };
   db.push(newDbValue);
 }
+
+export function dateControll(todaysDate: string, submitDate: string) {
+  const inputDate = new Date(submitDate);
+  const today = new Date(todaysDate);
+  return inputDate.getTime() <= today.getTime();
+}
