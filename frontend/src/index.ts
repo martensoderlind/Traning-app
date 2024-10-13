@@ -5,20 +5,23 @@ interface RunningSession {
 }
 
 const submitButton = document.querySelector("#submit") as HTMLButtonElement;
+const dateInput = document.querySelector("#date") as HTMLInputElement;
+const distanceInput = document.querySelector("#distance") as HTMLInputElement;
+const timeInput = document.querySelector("#time") as HTMLInputElement;
+const tableElement = document.querySelector("#placeholder") as HTMLTableElement;
+const newTableRow = document.createElement("tr") as HTMLTableRowElement;
 
 const API_URL = "http://localhost:8080";
 
 submitButton.addEventListener("click", async (e) => {
   e.preventDefault();
-  const dateInput = document.querySelector("#date") as HTMLInputElement;
-  const distanceInput = document.querySelector("#distance") as HTMLInputElement;
-  const timeInput = document.querySelector("#time") as HTMLInputElement;
 
   const valuesFromInput = {
     date: dateInput.value,
     duration: timeInput.value,
     distance: distanceInput.value,
   };
+
   try {
     const response = await fetch(`${API_URL}/submit`, {
       headers: {
@@ -64,16 +67,14 @@ const createTableCell = (input: string): HTMLTableCellElement => {
 };
 
 function addTableRow(session: RunningSession) {
-  const tableElement = document.querySelector("#placeholder");
   if (!tableElement) return;
-  const newTableRow = document.createElement("tr");
   newTableRow.append(
     createTableCell(session.date),
     createTableCell(session.distance.toString()),
     createTableCell(session.duration)
   );
 
-  tableElement?.appendChild(newTableRow);
+  tableElement.appendChild(newTableRow);
 }
 document.addEventListener("DOMContentLoaded", () => {
   fetchDbData();
