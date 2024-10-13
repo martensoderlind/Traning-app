@@ -65,18 +65,14 @@ const createTableCell = (input: string): HTMLTableCellElement => {
 
 function addTableRow(session: RunningSession) {
   const tableElement = document.querySelector("#placeholder");
-
+  if (!tableElement) return;
   const newTableRow = document.createElement("tr");
-  const newDateInput = document.createElement("td");
-  const newDistanceInput = document.createElement("td");
-  const newDurationInput = document.createElement("td");
-  newDateInput.textContent = session.date;
-  newDistanceInput.textContent = session.distance.toString();
-  newDurationInput.textContent = session.duration;
+  newTableRow.append(
+    createTableCell(session.date),
+    createTableCell(session.distance.toString()),
+    createTableCell(session.duration)
+  );
 
-  newTableRow.appendChild(newDateInput);
-  newTableRow.appendChild(newDistanceInput);
-  newTableRow.appendChild(newDurationInput);
   tableElement?.appendChild(newTableRow);
 }
 document.addEventListener("DOMContentLoaded", () => {
