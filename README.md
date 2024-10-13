@@ -14,11 +14,12 @@ Features
 
 Big picture plan
 
-![alt text](image1.png)
-    link to big picture plan: https://excalidraw.com/
+![My Image](./image1.png) 
+link to big picture plan: https://excalidraw.com/
 
 Planning Board
 For a detailed view of my project planning and progress, please visit my Planning Board.
+Link: https://github.com/users/martensoderlind/projects/2
 
 Technologies Used
 
