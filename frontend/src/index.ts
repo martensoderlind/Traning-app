@@ -1,5 +1,7 @@
 const submitButton = document.querySelector("#submit") as HTMLButtonElement;
 
+const API_URL = "http://localhost:8080";
+
 submitButton.addEventListener("click", async (e) => {
   e.preventDefault();
   const dateInput = document.querySelector("#date") as HTMLInputElement;
@@ -12,7 +14,7 @@ submitButton.addEventListener("click", async (e) => {
     distance: distanceInput.value,
   };
   try {
-    const response = await fetch("http://localhost:8080/submit", {
+    const response = await fetch(`${API_URL}/submit`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -32,7 +34,7 @@ submitButton.addEventListener("click", async (e) => {
 
 async function fetchDbData() {
   try {
-    const response = await fetch("http://localhost:8080/", {
+    const response = await fetch(`${API_URL}/`, {
       headers: {
         "Content-Type": "application/json",
       },
