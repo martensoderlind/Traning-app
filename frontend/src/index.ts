@@ -1,3 +1,5 @@
+import { time } from "console";
+
 const submitButton = document.querySelector("#submit") as HTMLButtonElement;
 
 submitButton.addEventListener("click", async (e) => {
@@ -12,10 +14,6 @@ submitButton.addEventListener("click", async (e) => {
     distance: distanceInput.value,
   };
 
-  const placeholderElement = document.querySelector(
-    "#placeholder"
-  ) as HTMLUListElement;
-
   const response = await fetch("http://localhost:8080/submit", {
     headers: {
       "Content-Type": "application/json",
@@ -24,19 +22,20 @@ submitButton.addEventListener("click", async (e) => {
     body: JSON.stringify(valuesFromInput),
   });
   const responseMessage = await response.json();
-  addTableRow(responseMessage.db[responseMessage.db.length - 1]);
+  console.log(responseMessage);
+  addTableRow(dateInput.value, timeInput.value, distanceInput.value);
 });
 
-function addTableRow(formData: any) {
+function addTableRow(date: string, duration: string, distance: string) {
   const tableElement = document.querySelector("#placeholder");
 
   const newTableRow = document.createElement("tr");
   const newDateInput = document.createElement("td");
   const newDistanceInput = document.createElement("td");
   const newDurationInput = document.createElement("td");
-  newDateInput.textContent = formData.date;
-  newDistanceInput.textContent = formData.distance.toString();
-  newDurationInput.textContent = formData.duration;
+  newDateInput.textContent = date;
+  newDistanceInput.textContent = distance.toString();
+  newDurationInput.textContent = duration;
 
   newTableRow.appendChild(newDateInput);
   newTableRow.appendChild(newDistanceInput);
