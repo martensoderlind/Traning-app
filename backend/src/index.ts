@@ -1,7 +1,6 @@
 import http from "http";
-// import { db } from "./mockDB";
-import { addValuesToDB } from "./util";
 import { addSession, db } from "./db";
+
 const port = 8080;
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && req.url === "/") {
@@ -14,7 +13,6 @@ const server = http.createServer((req, res) => {
       "Content-Type": "application/json",
     });
 
-    // res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(data));
   } else if (req.method === "OPTIONS") {
     res.writeHead(204, {
