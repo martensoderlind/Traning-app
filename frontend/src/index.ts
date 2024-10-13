@@ -1,5 +1,3 @@
-import { error, time } from "console";
-
 const submitButton = document.querySelector("#submit") as HTMLButtonElement;
 
 submitButton.addEventListener("click", async (e) => {
