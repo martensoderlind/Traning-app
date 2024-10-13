@@ -1,3 +1,9 @@
+interface RunningSession {
+  date: string;
+  duration: string;
+  distance: number;
+}
+
 const submitButton = document.querySelector("#submit") as HTMLButtonElement;
 
 const API_URL = "http://localhost:8080";
