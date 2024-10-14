@@ -14,7 +14,7 @@ Features
 
 Big picture plan
 
-![My Image](https://github.com/martensoderlind/Traning-app/blob/main/image-1.png)
+![My Image](https://github.com/martensoderlind/Traning-app/blob/main/image.png)
 
 Planning Board
 For a detailed view of my project planning and progress, please visit my Planning Board.
