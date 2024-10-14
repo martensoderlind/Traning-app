@@ -2,25 +2,22 @@ import http from "http";
 import { addSession, db } from "./db";
 import { validation } from "./util";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
 const port = 8080;
 const server = http.createServer((req, res) => {
   if (req.method === "GET" && req.url === "/") {
     const dbData = db.prepare("SELECT * FROM sessions");
     const data = dbData.all();
-    res.writeHead(200, {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Content-Type": "application/json",
-    });
+    res.writeHead(200, corsHeaders);
 
     res.end(JSON.stringify(data));
   } else if (req.method === "OPTIONS") {
-    res.writeHead(204, {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
-    });
+    res.writeHead(204, corsHeaders);
     res.end();
     return;
   } else if (req.method === "POST" && req.url === "/submit") {
