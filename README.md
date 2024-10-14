@@ -14,8 +14,7 @@ Features
 
 Big picture plan
 
-![My Image](./image1.png)
-link to big picture plan: https://excalidraw.com/
+![My Image](https://github.com/martensoderlind/Traning-app/blob/main/image-1.png)
 
 Planning Board
 For a detailed view of my project planning and progress, please visit my Planning Board.
