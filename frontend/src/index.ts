@@ -1,8 +1,4 @@
-interface RunningSession {
-  date: string;
-  duration: string;
-  distance: number;
-}
+import { RunningSession } from "./types";
 
 const submitButton = document.querySelector("#submit") as HTMLButtonElement;
 const dateInput = document.querySelector("#date") as HTMLInputElement;
